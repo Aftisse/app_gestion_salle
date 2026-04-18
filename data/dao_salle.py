@@ -12,7 +12,8 @@ class DataSalle:
             host=config["host"],
             user=config["user"],
             password=config["password"],
-            database=config["database"]
+            database=config["database"],
+            auth_plugin="caching_sha2_password"
         )
         return connexion
     def insert_salle(self, salle):
