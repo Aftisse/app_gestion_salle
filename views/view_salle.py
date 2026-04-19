@@ -36,13 +36,13 @@ class ViewSalle(ctk.CTk):
         self.cadreAction = ctk.CTkFrame(self, corner_radius=10)
         self.cadreAction.pack(pady=10, padx=10, fill="x")
 
-        self.btn_ajouter = ctk.CTkButton(self.cadreAction, text="Ajouter")
+        self.btn_ajouter = ctk.CTkButton(self.cadreAction, text="Ajouter",command=self.ajouter_salle)
         self.btn_ajouter.pack(side="left", padx=10, pady=10)
 
-        self.btn_modifier =ctk.CTkButton(self.cadreAction, text="Modifier")
+        self.btn_modifier =ctk.CTkButton(self.cadreAction, text="Modifier",command=self.modifier_salle)
         self.btn_modifier.pack(side="left", padx=10, pady=10)
 
-        self.btn_supprimer = ctk.CTkButton(self.cadreAction, text="Supprimer")
+        self.btn_supprimer = ctk.CTkButton(self.cadreAction, text="Supprimer",command=self.supprimer_salle)
         self.btn_supprimer.pack(side="left", padx=10, pady=10)
 
         self.btn_rechercher = ctk.CTkButton(self.cadreAction, text="Rechercher")
@@ -78,6 +78,14 @@ class ViewSalle(ctk.CTk):
                 messagebox.showerror("Erreur", message)
         except ValueError:
             messagebox.showerror("Erreur", "La capacité de la salle n'existe pas")
+    def supprimer_salle(self):
+        code = self.entry_code.get()
+        resultat, message = self.service_salle.supprimer_salle(code)
+        if resultat:
+            messagebox.showinfo("Succés",message)
+        else:
+            messagebox.showerror("Erreur",message)
+
 
 
 
