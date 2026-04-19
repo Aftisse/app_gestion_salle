@@ -31,6 +31,8 @@ class ServiceSalle:
             return False, f"Erreur de suppression: {e}"
     def rechercher_salle(self,codee):
         return self.dao_salle.get_salle(codee)
+    def recuperer_salle(self):
+        return self.dao_salle.get_salles()
 
 
 
