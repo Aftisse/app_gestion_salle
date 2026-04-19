@@ -1,6 +1,7 @@
 from models.salle import Salle
 from data.dao_salle import DataSalle
 from services.service_salle import ServiceSalle
+from views.view_salle import ViewSalle
 
 dao = DataSalle()
 connexion = dao.get_connection()
@@ -42,4 +43,5 @@ for s in service.recuperer_salle():
     print("_" * 35)
 resultat,message = service.supprimer_salle("2000")
 print(message)
-
+app = ViewSalle()
+app.mainloop()
