@@ -1,10 +1,12 @@
 import json
+import os
 import mysql.connector
 from models.salle import Salle
 
 class DataSalle:
     def __init__(self):
-        self.config_path = "data/config.json"
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.config_path = os.path.join(base_dir,"data","config.json")
     def get_connection(self):
         with open(self.config_path, "r", encoding="utf-8") as f:
             config = json.load(f)

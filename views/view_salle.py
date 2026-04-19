@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
+
+from main import resultat
 from models.salle import Salle
 from services.service_salle import ServiceSalle
 
@@ -45,6 +47,24 @@ class ViewSalle(ctk.CTk):
 
         self.btn_rechercher = ctk.CTkButton(self.cadreAction, text="Rechercher")
         self.btn_rechercher.pack(side="left", padx=10, pady=10)
+
+    def ajouter_salle(self):
+        try:
+            salle = Salle(
+                self.entry_code.get(),
+                self.entry_description.get(),
+                self.entry_categorie.get(),
+                int(self.entry_capacit.get())
+            )
+            resultat, message = self.service_salle.ajouter_salle(salle)
+            if resultat:
+                messagebox.showinfo("Succée", message)
+            else:
+                messagebox.showerror("Erreur", message)
+        except ValueError:
+            messagebox.showerror("Erreur", "Le code de la salle n'existe pas")
+
+
 
 
 
