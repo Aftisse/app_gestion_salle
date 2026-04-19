@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-
+from tkinter import ttk
 #from main import resultat
 from models.salle import Salle
 from services.service_salle import ServiceSalle
@@ -99,6 +99,28 @@ class ViewSalle(ctk.CTk):
             self.entry_capacit.insert(0, str(salle.capacit))
         else:
             messagebox.showerror("Erreur","salle introuvable")
+
+        self.cadreList = ctk.CTkFrame(self, corner_radius=10, width=400)
+        self.cadreList.pack(pady=10, padx=10)
+        self.treeList = ttk.Treeview(self.cadreList, columns=("code", "description", "categorie",
+                                                              "capacite"), show="headings")
+        self.treeList.heading("code", text="CODE")
+        self.treeList.heading("description", text="DESCRIPTION")
+        self.treeList.heading("categorie", text="CATEGORIES")
+        self.treeList.heading("capacite", text="CAPACITE")
+
+        self.treeList.column("code", width=50)
+        self.treeList.column("description", width=150)
+        self.treeList.column("categorie", width=100)
+        self.treeList.column("capacite", width=100)
+        self.treeList.pack(expand=True, fill="both", padx=10, pady=10)
+
+        self.lister_salle()
+
+
+
+
+
 
 
 
