@@ -1,5 +1,6 @@
 from models.salle import Salle
 from data.dao_salle import DataSalle
+from services.service_salle import ServiceSalle
 
 dao = DataSalle()
 connexion = dao.get_connection()
@@ -25,3 +26,20 @@ for s in liste:
 
 dao.delete_salle("1000")
 print("Salle supprimée")
+
+service =ServiceSalle()
+s1 = Salle("2000","salle Anglais", "Langues",35)
+resultat, message = service.ajouter_salle(s1)
+print(message)
+resultat,message = service.modifier_salle(Salle("2000","salle Francais","Langues",35))
+print(message)
+
+salle = service.rechercher_salle("2000")
+if salle:
+    print(salle.afficher_infos())
+for s in service.recuperer_salle():
+    print(s.afficher_infos())
+    print("_" * 35)
+resultat,message = service.supprimer_salle("2000")
+print(message)
+
