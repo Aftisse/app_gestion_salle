@@ -122,6 +122,49 @@ class ViewSalle(ctk.CTk):
         liste = self.service_salle.recuperer_salles()
         for s in liste:
             self.treeList.insert("", "end", values=(s.code, s.description, s.categorie, s.capacite))
+    def ajouter_salle(self):
+        try:
+            salle = Salle(
+                self.entry_code.get(),
+                self.entry_description.get(),
+                self.entry_categorie.get(),
+                self.entry_capacit.get()
+            )
+            resultat, message = self.service_salle.ajouter_salle(salle)
+            if resultat:
+                messagebox.showinfo("succées", message)
+                self.lister_salle()
+            else:
+                messagebox.showerror("Erreur", message)
+        except ValueError:
+            messagebox.showerror("Erreur","La capacité de la salle n'existe pas")
+    def modifer_salle(self):
+        try:
+            salle = Salle(
+                self.entry_code.get(),
+                self.entry_description.get(),
+                self.entry_categorie.get(),
+                self.entry_capacit.get()
+            )
+            resultat, message = self.service_salle.modifier_salle(salle)
+            if resultat:
+                messagebox.showinfo("succées", message)
+                self.lister_salle()
+            else:
+                messagebox.showerror("Erreur", message)
+        except ValueError:
+            messagebox.showerror("Erreur","La capacité de la salle n'existe pas")
+    def supprimer_salle(self):
+        code = self.entry_code.get()
+        resultat, message = self.service_salle.supprimer_salle(code)
+        if resultat:
+            messagebox.showinfo("Succées", message)
+            self.lister_salle()
+        else:
+            messagebox.showerror("Erreur", message)
+
+
+
 
 
 
