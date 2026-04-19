@@ -23,5 +23,12 @@ class ServiceSalle:
             return True,"confirmation de l'ajout de salle"
         except Exception as e:
             return False, f"Erreur: {e}"
+    def supprimer_salle(self,codee):
+        try:
+            self.dao_salle.delete_salle(codee)
+            return True,"confirmation de suppression"
+        except Exception as e:
+            return False, f"Erreur de suppression: {e}"
+
 
 
