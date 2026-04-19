@@ -45,7 +45,7 @@ class ViewSalle(ctk.CTk):
         self.btn_supprimer = ctk.CTkButton(self.cadreAction, text="Supprimer",command=self.supprimer_salle)
         self.btn_supprimer.pack(side="left", padx=10, pady=10)
 
-        self.btn_rechercher = ctk.CTkButton(self.cadreAction, text="Rechercher")
+        self.btn_rechercher = ctk.CTkButton(self.cadreAction, text="Rechercher",command=self.rechercher_salle)
         self.btn_rechercher.pack(side="left", padx=10, pady=10)
 
     def ajouter_salle(self):
@@ -85,7 +85,20 @@ class ViewSalle(ctk.CTk):
             messagebox.showinfo("Succés",message)
         else:
             messagebox.showerror("Erreur",message)
+    def rechercher_salle(self):
+        code = self.entry_code.get()
+        salle = self.service_salle.rechercher_salle(code)
+        if salle:
+            self.entry_description.delete(0, "end")
+            self.entry_description.insert(0, salle.description)
 
+            self.entry_categorie.delete(0, "end")
+            self.entry_categorie.insert(0, salle.categorie)
+
+            self.entry_capacit.delete(0, "end")
+            self.entry_capacit.insert(0, str(salle.capacit))
+        else:
+            messagebox.showerror("Erreur","salle introuvable")
 
 
 
