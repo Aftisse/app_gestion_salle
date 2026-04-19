@@ -62,8 +62,22 @@ class ViewSalle(ctk.CTk):
             else:
                 messagebox.showerror("Erreur", message)
         except ValueError:
-            messagebox.showerror("Erreur", "Le code de la salle n'existe pas")
-
+            messagebox.showerror("Erreur", "La capacité de la salle n'existe pas")
+    def modifier_salle(self):
+        try:
+            salle = Salle(
+                self.entry_code.get(),
+                self.entry_description.get(),
+                self.entry_categorie.get(),
+                int(self.entry_capacit.get())
+            )
+            resultat, message = self.service_salle.modifier_salle(salle)
+            if resultat:
+                messagebox.showinfo("Succée", message)
+            else:
+                messagebox.showerror("Erreur", message)
+        except ValueError:
+            messagebox.showerror("Erreur", "La capacité de la salle n'existe pas")
 
 
 
